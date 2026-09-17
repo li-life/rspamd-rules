@@ -1,735 +1,153 @@
-# Curated Multimaps for Rspamd, second edition
+# Rspamd Rules – li-life fork
 
-**Rspamd** offers so-called **multimaps** and their maps. With them you can create rules with or without regular expressions.
+This repository is a customized fork of [martinschaible/rspamd-rules](https://github.com/martinschaible/rspamd-rules), a collection of curated **Rspamd multimaps and map files** for spam filtering.
 
-I started developing the rules in early 2024 and i am now working on an improved second version.
+The purpose of this fork is to keep the original upstream rules and updates while allowing us to make adjustments.
 
-Before Rspamd, I used an older product called **Declude** as a spam filtering system for our server as well as for customers. Declude also offered a rule system based on regular expressions. This experience is very useful to me here.
+> **Upstream:** [martinschaible/rspamd-rules](https://github.com/martinschaible/rspamd-rules)  
+> **Fork:** [li-life/rspamd-rules](https://github.com/li-life/rspamd-rules)
 
-:bulb: The rules are updated at least once, but usually several times a day and are therefore sure to be accurate.
+## Why this fork exists
 
-📢 If you have any questions or feedback drop me line at the [discussions](https://github.com/martinschaible/rspamd-rules/discussions).
+The upstream project is actively maintained and provides the base rule set used by this repository.
 
-🐛 Bugs and problems can be reported here: [Issues](https://github.com/martinschaible/rspamd-rules/issues).
+For our own mail systems we occasionally need to react more quickly to false positives, false negatives or customer-specific requirements. This fork allows us to make small adjustments without losing future upstream updates.
 
-🍀 Feel free to use these maps on your Rspamd server.
+The goal is therefore:
+
+- keep the repository as close to upstream as possible;
+- receive new and updated rules from upstream;
+- make adjustments;
+- use map URLs hosted in this fork;
+- minimize the number of changes that can cause merge conflicts.
+
+## Upstream synchronization
+
+The fork is periodically synchronized with the upstream repository using **GitHub Actions**.
+
+Workflow:
+
+```text
+martinschaible/rspamd-rules
+          │
+          │ upstream changes
+          ▼
+     GitHub Actions
+          │
+          ▼
+   li-life/rspamd-rules
+          │
+          ├─ upstream updates
+          └─ li-life adjustments
+```
+
+The synchronization workflow is located at:
+
+```text
+.github/workflows/autoupdate-fork.yml
+```
+
+### Merge conflicts
+
+Automatic synchronization works as long as upstream and this fork do not make incompatible changes to the same lines.
+
+For this reason, our changes should be kept as small and isolated as possible. If both repositories modify the same section, the conflict must be resolved manually.
 
 ## Installation
-The base is the file *multimap.conf* in the folder `/etc/rspamd/local.d`. This file includes all configuration files of the map files. These files are located in the same folder and must also be copied to the server.
 
-The map files of the first generation begin with an underscore `_multimap....map`.
-The second generation does not have the leading underscore.
+The Rspamd configuration is based on `multimap.conf` and the corresponding configuration files.
 
-Important: To be as effective as possible, both versions must be active until the migration is complete.
+The configuration files are normally placed in:
 
-Finally, the Rspamd service must be restarted
-
+```text
+/etc/rspamd/local.d/
 ```
+
+Remote map files referenced by URL do not have to be copied manually to the Rspamd server. Rspamd downloads and caches them locally.
+
+After changing configuration files, first check the configuration:
+
+```bash
+rspamadm configtest
+```
+
+Then restart Rspamd:
+
+```bash
 systemctl restart rspamd
 ```
 
-The map files in the folder `/etc/rspamd/maps.d` does not need to be copied. **Rspamd** loads them directly from Github and caches them locally. New versions are checked periodically.
+## Repository structure
 
-## Configuration files: Changes and Updates
-In the near future, I will be creating more map files.
-It's necessary to split existing map files into smaller ones. Sometimes, when analyzing false positives, it's really difficult to find the underlying rule. Splitting them into smaller files will help with this.
+The project contains rules for different parts of an email and different spam categories, including for example:
 
-:point_right:  Please note: This means that the configuration files will need to be updated regularly, and the service will need to be restarted.<br>
-
-:collision: Latest Changes:
-
-| Date     | File                                       | Reason                        |
-| -------- | -------------------------------------------| ----------------------------- |
-| 09.08.26 | multimap.conf                              | Legacy files removed          |
-| 10.08.26 | multimap.conf                              | New map files added           |
-
-## Content
-:point_right: All map files of the *first version* are stored in the folder `/etc/rspamd/maps.d/legacy`.<br>
-:point_right: The files of the *second edition* are stored in subfolders according to the topic.
-
-----
-
-### Setup for "Base"
-
-Description of the topic goes here.....
-
-Folder structure:
-
-```
-base
-  ├─ base.country.map
-  ├─ base.body.charenc.koi8r.map              *
-  ├─ base.body.charenc.windows1251.map        *
-  ├─ base.body.markup.hidden.map
-  ├─ base.body.markup.map
-  │
-  ├─ href
-  │   ├─ base.body.href.domain.map            *
-  │   ├─ base.body.href.domain.ip.map         *
-  │   ├─ base.body.href.domain.tld.map        *
-  │   ├─ base.body.href.domain.google.map     *
-  │   ├─ base.body.href.nossl.map             *
-  │   ├─ base.body.href.path.map              *
-  │   ├─ base.body.href.path.filename.map     *
-  │   └─ base.body.href.path.wordpress.map    *
-  │
-  └─ img
-      ├─ base.body.img.domain.ip.map          *
-      ├─ base.body.img.domain.tld.map         *
-      ├─ base.body.img.domain.name.map        *
-      ├─ base.body.img.nossl.map              *
-      ├─ base.body.img.path.map               *
-      └─ base.body.img.shortener.map          *
-
-lists
-  ├─ list.tld.map                             *
-  │                                           *
-  └─ list.url.shortener.map                   *
+```text
+maps.d/
+├─ base/
+├─ body/
+├─ header/
+├─ sender/
+├─ subject/
+├─ lists/
+├─ whitelist/
+└─ legacy/
 ```
 
-* -> "one_shot" is set
+The rules include generic filters as well as topic-specific rules for areas such as:
 
-**Configuration**
+- phishing;
+- scam;
+- malware;
+- sales and marketing spam;
+- finance and investment spam;
+- health-related spam;
+- seasonal campaigns;
+- sender, subject and body patterns;
+- URLs, domains and other message characteristics.
 
-:small_blue_diamond: multimap.base.conf<br>
-:small_blue_diamond: multimap.base.body.href.conf<br>
-:small_blue_diamond: multimap.base.body.img.conf<br>
+For the complete and current rule structure, see the repository contents and the upstream project documentation.
 
-----
+## Scoring
 
-### Setup for "Common"
+Rspamd symbols created by the multimap configuration can be assigned different scores.
 
-Description of the topic goes here.....
+Scores should always be adjusted carefully because increasing a symbol score can also increase the risk of **false positives**.
 
-Folder structure:
-```
-body
-  ├─ body.attachment.map
-  ├─ body.attachment.ext.map
-  ├─ body.emergency.map
-  ├─ body.special.map
-  │
-  ├─ body.az.orgname.map 
-  ├─ body.ch.orgname.map
-  ├─ body.de.orgname.map
-  ├─ body.us.orgname.map
-  │
-  ├─ body.orgbrandprod.map
-  │
-  ├─ href
-  │   ├─ body.href.az.domain.name.map
-  │   ├─ body.href.ch.domain.name.map
-  │   ├─ body.href.de.domain.name.map
-  │   ├─ body.href.us.domain.name.map
-  │   │
-  │   ├─ body.href.domain.name.pattern.map
-  │   └─ body.href.url.path.orgbrandprod.map
-  │
-  ├─ de
-  │   ├─ body.de.map
-  │   ├─ body.de.greetings.map
-  │   ├─ body.de.intros.map
-  │   ├─ body.de.message.map
-  │   │
-  │   ├─ body.de.singleword.map
-  │   ├─ body.de.singleword.special.map
-  │   ├─ body.de.singleword.ucase.map
-  │   │
-  │   ├─ body.de.ucase.map
-  │   └─ body.de.unsubscribe.map
-  └─ en
-      └─ ....
+When changing scores or map rules, test the effect against both known spam and legitimate messages before deploying the change broadly.
 
-header
-  ├─ header.hostname.map
-  ├─ header.ipaddress.map
-  │
-  ├─ header.googlegroups.groupid.map
-  └─ header.googlegroups.listpost.map
+## Updating rules
 
-sender
-  ├─ sender.address.map
-  ├─ sender.address.domain.name.map
-  ├─ sender.address.orgbrandprod.map
-  ├─ sender.address.people.map
-  ├─ sender.address.tld.map
-  │
-  ├─ de
-  │   └─ sender.address.de.map
-  ├─ en
-  │   └─ ....
-  │
-  ├─ sender.from.orgbrandprod.map
-  ├─ sender.from.people.map
-  ├─ sender.from.special.map
-  ├─ sender.from.special.emoji.map
-  ├─ sender.from.title.map 
-  ├─ sender.from.tld.map                                   **
-  │
-  ├─ de
-  │   ├─ sender.from.de.singleword.map
-  │   ├─ sender.from.de.singleword.special.map
-  │   ├─ sender.from.de.singleword.ucase.map
-  │   │
-  │   └─ sender.from.de.map
-  └─ en
-      └─ ....
+Normal upstream changes are received through the automatic synchronization workflow.
 
-subject  
-  ├─ subject.health.medname.map
-  ├─ subject.orgbrandprod.map
-  ├─ subject.special.map
-  ├─ subject.special.emoji.map
-  │
-  ├─ de
-  │   ├─ subject.de.map
-  │   ├─ subject.de.greetings.map
-  │   ├─ subject.de.message.map
-  │   │
-  │   ├─ subject.de.singleword.map
-  │   ├─ subject.de.singleword.special.map
-  │   ├─ subject.de.singleword.ucase.map
-  │   │
-  │   └─ subject.de.ucase.map
-  └─ en
-      └─ ....
-```
+When making an adjustment:
 
-**Configuration**
+1. keep the change as small as possible;
+2. use a clear commit message;
+3. avoid changing upstream files unnecessarily;
+4. test the affected Rspamd configuration;
+5. monitor the next automatic upstream synchronization for conflicts.
 
-:small_blue_diamond: multimap.body.conf<br>
-:small_blue_diamond: multimap.body.(de|en).conf<br>
-:small_blue_diamond: multimap.body.href.conf<br>
+## Reporting issues
 
-:small_blue_diamond: multimap.header.conf<br>
+For problems caused by a **li-life-specific modification**, use this fork:
 
-:small_blue_diamond: multimap.sender.address.conf<br>
-:small_blue_diamond: multimap.sender.address.(de|en).conf<br>
-:small_blue_diamond: multimap.sender.from.conf<br>
-:small_blue_diamond: multimap.sender.from.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).conf<br>
+[github.com/li-life/rspamd-rules/issues](https://github.com/li-life/rspamd-rules/issues)
 
-:small_blue_diamond: multimap.subject.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).conf<br>
+For questions, bugs or rule changes concerning the original project, please use the upstream repository:
 
-----
+- [Upstream issues](https://github.com/martinschaible/rspamd-rules/issues)
+- [Upstream discussions](https://github.com/martinschaible/rspamd-rules/discussions)
 
-### Setup for "Asia"
+## Credits
 
-Description of the topic goes here.....
+The original rule set and ongoing upstream development are maintained by **Martin Schaible**:
 
-Folder structure:
-```
-body  
-  └─ body.asia.map
+[github.com/martinschaible/rspamd-rules](https://github.com/martinschaible/rspamd-rules)
 
-sender  
-  ├─ sender.from.asia.map
-  └─ sender.from.phishing.orgbrandprod.asia.map
+This fork is maintained by us.
 
-subject  
-  └─ subject.asia.map
-```
+## Disclaimer
 
-**Configuration:**
+Spam filtering rules can never guarantee perfect detection. Changes may cause false positives or allow unwanted messages to pass through.
 
-:small_blue_diamond: multimap.body.conf<br>
-:small_blue_diamond: multimap.sender.from.conf<br>
-:small_blue_diamond: multimap.subject.conf<br>
-
-----
-
-### Setup for "Health"
-
-Description of the topic goes here.....
-
-Folder structure:
-
-```
-body
-  ├─ de
-  │   ├─ body.de.health.map
-  │   │
-  │   ├─ body.de.health.meds.map                           **
-  │   ├─ body.de.health.men.map                            **
-  │   ├─ body.de.health.specific.map                       ??
-  │   └─ body.de.health.wl.map                             **
-  └─ en
-      └─ ....
-
-sender
-  ├─ de
-  │   ├─ sender.de.health.map
-  │   │
-  │   ├─ sender.de.health.meds.map                         **
-  │   ├─ sender.de.health.men.map                          **
-  │   ├─ sender.de.health.specific.map                     ??
-  │   └─ sender.de.health.wl.map                           **
-  └─ en
-      └─ ....
-
-subject
-  ├─ de
-  │   ├─ subject.de.health.map
-  │   │
-  │   ├─ subject.de.health.meds.map                        **
-  │   ├─ subject.de.health.men.map                         **
-  │   ├─ subject.de.health.specific.map                    ??
-  │   └─ subject.de.health.wl.map                          **
-  └─ en
-      └─ ....
-
-lists
-  └─ list.medname.map
-
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.(de|en).health.conf<br>
-:small_blue_diamond: multimap.sender.from.health.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).health.conf<br>
-:small_blue_diamond: multimap.subject.health.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).health.conf<br>
-
-----
-
-### Setup for "Malware"
-
-Description of the topic goes here.....
-
-Folder structure:
-```
-body
-  ├─ de
-  │   └─ body.de.malware.map
-  └─ en
-      └─ ....
-
-sender
-  ├─ de
-  │   └─ sender.de.malware.map
-  └─ en
-      └─ ....
-
-subject
-  ├─ de
-  │   └─ subject.de.malware.map
-  └─ en
-      └─ ....
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.(de|en).malware.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).malware.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).malware.conf<br>
-
-----
-
-### Setup for "Phishing"
-
-Description of the topic goes here.....
-
-Folder structure:
-```
-body
-  ├─ de
-  │   ├─ body.de.phishing.map
-  │   │
-  │   ├─ body.de.phishing.account.map
-  │   ├─ body.de.phishing.alertaction.map
-  │   ├─ body.de.phishing.banking.map
-  │   ├─ body.de.phishing.banking.app.map
-  │   ├─ body.de.phishing.banking.tan.map
-  │   ├─ body.de.phishing.card.map
-  │   ├─ body.de.phishing.email.map
-  │   ├─ body.de.phishing.it.map
-  │   ├─ body.de.phishing.greetings.map
-  │   ├─ body.de.phishing.obfuscation.map
-  │   ├─ body.de.phishing.parcel.map
-  │   ├─ body.de.phishing.password.map
-  │   ├─ body.de.phishing.payment.map
-  │   ├─ body.de.phishing.refund.map
-  │   ├─ body.de.phishing.rewards.map
-  │   ├─ body.de.phishing.subscription.map
-  │   ├─ body.de.phishing.survey.map
-  │   └─ body.de.phishing.wallet.map
-  ├─ en
-  │    └─ ....
-  │
-  ├─ body.phishing.orgbrandprod.map
-  └─ body.phishing.orgbrandprod.ucase.map                  **
-
-sender
-  ├─ de
-  │   ├─ sender.from.de.phishing.map
-  │   │
-  │   └─ sender.from.de.phishing.it.map
-  ├─ en
-  │   └─ ....
-  │
-  ├─ sender.from.phishing.orgbrandprod.map
-  │
-  ├─ sender.from.phishing.orgbrandprod.account.map
-  ├─ sender.from.phishing.orgbrandprod.banking.map
-  ├─ sender.from.phishing.orgbrandprod.it.map
-  ├─ sender.from.phishing.orgbrandprod.parcel.map
-  ├─ sender.from.phishing.orgbrandprod.refund.map
-  ├─ sender.from.phishing.orgbrandprod.rewards.map
-  └─ sender.from.phishing.orgbrandprod.ucase.map
-
-subject
-  ├─ de
-  │   ├─ subject.de.phishing.map
-  │   │
-  │   ├─ subject.de.phishing.account.map
-  │   ├─ subject.de.phishing.alertaction.map
-  │   ├─ subject.de.phishing.banking.map
-  │   ├─ subject.de.phishing.banking.app.map
-  │   ├─ subject.de.phishing.banking.tan.map
-  │   ├─ subject.de.phishing.card.map
-  │   ├─ subject.de.phishing.email.map
-  │   ├─ subject.de.phishing.it.map
-  │   ├─ subject.de.phishing.parcel.map
-  │   ├─ subject.de.phishing.password.map
-  │   ├─ subject.de.phishing.payment.map
-  │   ├─ subject.de.phishing.refund.map
-  │   ├─ subject.de.phishing.rewards.map
-  │   ├─ subject.de.phishing.subscription.map
-  │   ├─ subject.de.phishing.survey.map
-  │   └─ subject.de.phishing.wallet.map
-  ├─ en
-  │   └─ ....
-  │
-  ├─ subject.phishing.orgbrandprod.map
-  └─ subject.phishing.orgbrandprod.ucase.map
-
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.phishing.conf<br>
-:small_blue_diamond: multimap.body.(de|en).phishing.conf<br>
-:small_blue_diamond: multimap.sender.from.phishing.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).phishing.conf<br>
-:small_blue_diamond: multimap.subject.phishing.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).phishing.conf<br>
-
-----
-
-### Setup for "Sale"
-
-Description of the topic goes here.....
-
-Folder structure:
-```
-body
-  ├─ de
-  │   ├─ body.de.sale.map
-  │   │
-  │   ├─ body.de.sale.app.map
-  │   ├─ body.de.sale.greetings.map
-  │   ├─ body.de.sale.china.map
-  │   ├─ body.de.sale.leads.map
-  │   ├─ body.de.sale.mailings.map
-  │   ├─ body.de.sale.media.map
-  │   ├─ body.de.sale.seo.map
-  │   ├─ body.de.sale.specific.map
-  │   └─ body.de.sale.website.map
-  ├─ en
-  │    └─ ....
-  │
-  └─ body.sale.orgbrandproduct.map
-
-sender
-  ├─ de
-  │   ├─ sender.from.de.sale.map
-  │   └─ sender.from.de.sale.specific.map
-  ├─ en
-  │   └─ ....
-  │
-  └─ sender.from.sale.orgbrandproduct.map
-
-subject  
-  ├─ de
-  │   ├─ subject.de.sale.map
-  │   │
-  │   ├─ subject.de.sale.app.map
-  │   ├─ subject.de.sale.china.map
-  │   ├─ subject.de.sale.greetings.map
-  │   ├─ subject.de.sale.leads.map
-  │   ├─ subject.de.sale.mailings.map
-  │   ├─ subject.de.sale.media.map
-  │   ├─ subject.de.sale.seo.map
-  │   ├─ subject.de.sale.specific.map
-  │   └─ subject.de.sale.website.map
-  ├─ en
-  │    └─ ....
-  │
-  └─ subject.sale.orgbrandproduct.map
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.sale.conf<br>
-:small_blue_diamond: multimap.body.(de|en).sale.conf<br>
-:small_blue_diamond: multimap.sender.from.sale.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).sale.conf<br>
-:small_blue_diamond: multimap.subject.sale.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).sale.conf<br>
-
-----
-
-### Setup for "Scam"
-
-Description of the topic goes here.....
-
-Folder structure:
-
-```
-body
-  ├─ de
-  │   ├─ body.de.scam.map
-  │   │
-  │   ├─ body.de.scam.beneficiary.map
-  │   ├─ body.de.scam.business.map
-  │   ├─ body.de.scam.bignumbers.map
-  │   ├─ body.de.scam.card.map
-  │   ├─ body.de.scam.donation.map
-  │   ├─ body.de.scam.funds.map
-  │   ├─ body.de.scam.heir.map
-  │   ├─ body.de.scam.investment.map
-  │   ├─ body.de.scam.nomination.map
-  │   ├─ body.de.scam.order.map
-  │   ├─ body.de.scam.payment.map
-  │   ├─ body.de.scam.ransom.map
-  │   └─ body.de.scam.winning.map
-  └─ en
-      └─ ....
-
-sender
-  ├─ de
-  │   └─ sender.from.de.scam.map
-  └─ en
-      └─ ....
-
-subject  
-  ├─ de
-  │   ├─ subject.de.scam.map
-  │   ├─ subject.de.scam.beneficiary.map
-  │   ├─ subject.de.scam.bignumbers.map
-  │   ├─ subject.de.scam.business.map
-  │   ├─ subject.de.scam.card.map
-  │   ├─ subject.de.scam.donation.map
-  │   ├─ subject.de.scam.funds.map
-  │   ├─ subject.de.scam.heir.map
-  │   ├─ subject.de.scam.investment.map
-  │   ├─ subject.de.scam.nomination.map
-  │   ├─ subject.de.scam.order.map
-  │   ├─ subject.de.scam.payment.map
-  │   └─ subject.de.scam.winning.map
-  └─ en
-      └─ ....
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.(de|en).scam.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).scam.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).scam.conf<br>
-
-----
-
-### Setup for "Seasonal"
-
-Some Spam attacks occur regularly but are short-lived.
-Therefore, any RexEx filters have a limited lifespan.
-The topics cover everything from scams and phishing to sales.
-Such rules belong here.
-
-Folder structure:
-```
-body
-  ├─ de
-  │   └─ subject.en.seasonal.map
-  └─ en
-      └─ ....
-
-sender
-  └─ sender.from.seasonal.map
-
-subject
-  ├─ de
-  │   └─ subject.de.seasonal.map
-  └─ en
-      └─ ....
-
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.(de|en).seasonal.conf<br>
-:small_blue_diamond: multimap.sender.from.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).seasonal.conf<br>
-
-----
-
-### Setup for "Other Topics"
-
-Description of the topic goes here.....
-
-Folder structure:
-```
-body
-  ├─ de
-  │   ├─ body.de.adult.map
-  │   ├─ body.de.finance.map
-  │   ├─ body.de.gambling.map
-  │   ├─ body.de.lottery.map
-  │   ├─ body.de.makemoney.map
-  │   └─ body.de.stocks.map
-  └─ en
-      └─ ....
-
-sender
-  ├─ de
-  │   ├─ sender.from.de.adult.map
-  │   ├─ sender.from.de.finance.map
-  │   ├─ sender.from.de.gambling.map
-  │   ├─ sender.from.de.lottery.map
-  │   └─ sender.from.de.makemoney.map
-  └─ en
-      └─ ....
-
-subject
-  ├─ de
-  │   ├─ subject.de.adult.map
-  │   ├─ subject.de.finance.map
-  │   ├─ subject.de.gambling.map
-  │   ├─ subject.de.lottery.map
-  │   ├─ subject.de.makemoney.map
-  │   └─ subject.de.stocks.map
-  └─ en
-      └─ ....
-```
-
-**Configuration:**
-
-:small_blue_diamond: multimap.body.(de|en).adult.conf<br>
-:small_blue_diamond: multimap.body.(de|en).finance.conf<br>
-:small_blue_diamond: multimap.body.(de|en).gambling.conf<br>
-:small_blue_diamond: multimap.body.(de|en).lottery.conf<br>
-:small_blue_diamond: multimap.body.(de|en).makemoney.conf<br>
-:small_blue_diamond: multimap.body.(de|en).stocks.conf<br>
-
-:small_blue_diamond: multimap.sender.from.(de|en).adult.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).finance.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).gambling.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).lottery.conf<br>
-:small_blue_diamond: multimap.sender.from.(de|en).makemoney.conf<br>
-
-:small_blue_diamond: multimap.subject.(de|en).adult.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).finance.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).gambling.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).lottery.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).makemoney.conf<br>
-:small_blue_diamond: multimap.subject.(de|en).stocks.conf<br>
-
-----
-
-### Setup for "whitelist"
-
-Description of the topic goes here.....
-
-Folder structure:
-```
-whitelist
-  ├─ header
-  │    ├─ header.ipaddress.map
-  │    └─ header.hostname.map
-  │
-  ├─ body
-  │    ├─ body.emergency.map
-  │    ├─ body.az.orgname.map
-  │    ├─ body.ch.orgname.map
-  │    ├─ body.de.orgname.map
-  │    ├─ body.us.orgname.map
-  │    │
-  │    ├─ href
-  │    │   ├─ body.href.az.url.map
-  │    │   ├─ body.href.ch.url.map
-  │    │   ├─ body.href.de.url.map
-  │    │   ├─ body.href.us.url.map
-  │    │   └─ body.href.mailing.url.map
-  │    │
-  │    ├─ de
-  │    │   ├─ body.de.singleword.map
-  │    │   └─ body.de.map
-  │    └─ en
-  │        └─ ....
-  │
-  ├─ sender
-  │    ├─ de
-  │    │   └─ sender.from.de.map
-  │    └─ en
-  │        └─ ....
-  │
-  └─ subject
-       ├─ de
-       │   ├─ subject.de.map
-       │   └─ subject.de.singleword.map
-       └─ en
-           └─ ....
-```
-
-**Configuration**
-
-:small_blue_diamond: multimap.whitelist.body.conf<br>
-:small_blue_diamond: multimap.whitelist.body.(de|en).conf<br>
-:small_blue_diamond: multimap.whitelist.body.href.conf<br>
-:small_blue_diamond: multimap.whitelist.header.conf<br>
-:small_blue_diamond: multimap.whitelist.sender.from.(de|en).conf<br>
-:small_blue_diamond: multimap.whitelist.subject.(de|en).conf<br>
-
-----
-
-## Tips and Tricks
-
-### Scoring
-
-If you want to increase or decrease a symbol's score, you can do so in the UI.
-Click "Symbols" in the menu, then find the desired symbol and change the score.
-
-Important
-:small_blue_diamond: You can change the scoring for a map file, or rather its **symbol**, and **not for a single rule**.<br>
-:small_blue_diamond: The scoring for an individual rule can *only* be changed in the map file. Depending on the rule, I do it this way.<br>
-
-A score of 6 can be considered SPAM-LOW.
-Using SmarterMail, this value is multiplied by 1.7 to reach 10 points.
-
-I set most map files to score level 12.
-
-### Which rule has fired?
-Unfortunately, Rspamd is unable to log the rule(s) of a map file that fired.
-This complicates the whole process in case of an error.
-
-### Handling false/positives
-There's always a risk that an email will be mistakenly marked as spam.
-
-If a map file is to blame, I'm happy to change or remove a rule.
-My rules are designed specifically for *German-speaking* countries.
-Therefore, some phrases might be too strong for English-speaking countries.
-
-Open an issue and I'll be happy to resolve the issue.
-
-### When spam emails slip through
-Great! I love fresh spam! To create one or more rules, I need the complete, unaltered email.
-Send it to spamcop[ät]netfusion[döt]ch and add the word "SPAM" to the subject line.
-
-### Dealing with false/positives
-No Great! Sometimes a rule is to restrictive and a good email was marked as spam.
-Send it to the same mail address as above and add the word "NOSPAM" to the subject line.
-
-<br>
-<p align="center">Made with :heart: and :coffee:</p>
+Always test rule and score changes carefully before using them in production.
