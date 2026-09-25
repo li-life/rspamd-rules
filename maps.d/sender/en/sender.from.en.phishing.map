@@ -57,6 +57,7 @@
 
 # B
 # ------------------------------------------------------------------------------
+/^.?bank.{0,10}support/i
 /banking.{0,10}services?/i
 /benefits.{0,10}(center|offer|points|reward|treat)/i
 
@@ -249,12 +250,14 @@
 
 # S
 # ------------------------------------------------------------------------------
-/safety.{0,10}(alert|bonus|check|kit)/i
+/(safety|secure|security).{0,10}alert/i
+/(safety|secure|security).{0,10}bonus/i
+/(safety|secure|security).{0,10}(check|compliance)/i
+/(safety|secure|security).{0,10}kit/i
+/(safety|secure|security).{0,10}notification/i
+/(safety|secure|security).{0,10}support/i
 
 /saison.{0,10}card/i
-
-/secure.{0,10}notification/i
-/security.{0,10}(alert|compliance)/i
 
 /service.{0,10}client/i
 
@@ -324,6 +327,7 @@
 
 # W
 # ------------------------------------------------------------------------------
+/w.?8ben/i
 
 # X
 # ------------------------------------------------------------------------------
