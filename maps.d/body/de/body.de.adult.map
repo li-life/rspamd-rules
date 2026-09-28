@@ -225,6 +225,8 @@
 
 /(geilen|groben|kostenlos|ungezwungen|unkompliziert|suche nach|verdorbenen).{1,10}sex/i
 
+/gerade sind.{1,10}frauen online/i
+
 /(geprüfte|verifizierte).{1,10}aktive.{1,10}mitglieder/i
 /geschützter.{1,10}raum mit verifizierten/iu
 
@@ -507,6 +509,8 @@
 /verifizierte mitglieder.{1,10}keine.{1,10}fake.?profile/i
 /versauten?.{1,10}(fick|sex|treffen)/i
 /vertraulichkeit.{1,10}anonymität/iu
+
+/vor kurzem bin ich auf einen dienst/i
 
 # W
 # ------------------------------------------------------------------------------

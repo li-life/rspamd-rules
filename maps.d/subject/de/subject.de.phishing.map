@@ -57,6 +57,8 @@
 
 # A
 # ------------------------------------------------------------------------------
+/abgelaufen.{1,10}neues formular einreichen/i
+/abgeschlossen.{1,10}angaben.{1,10}bestätigen/iu
 /abweichung im datenabgleich/i
 
 /adresse.{1,10}aktualisieren.{1,10}referenz/i
@@ -316,6 +318,7 @@
 /kundendaten.{1,10}benötigen eine aktualisierung/iu
 /kundendaten.{1,10}sind (abgelaufen|veraltet)/i
 
+/kundeninformation.{1,10}angaben vervollständigen/iu
 /kundeninformation.{1,10}angabenstatus überprüfen/iu
 
 /kundenservice von/i
@@ -449,6 +452,8 @@
 /sicherheitsupdate.{1,10}frist heute/i
 /sicherheitsupdate.{1,10}steht bevor/i
 /sicherheitsupdate.{1,10}verordnung/i
+
+/sicherstellung korrekter daten/i
 
 /sie ihr serviceportal/i
 /sie ihre daten.{1,10}aktuell/i

@@ -134,7 +134,8 @@
 # ------------------------------------------------------------------------------
 /finde mich in dieser.{1,20}gruppe/i
 
-/flirt.{1,10}(nachricht|treffen)/i
+/flirt(en)?.{1,10}im kostenlosen/i
+/flirt(en)?.{1,10}(nachricht|treffen)/i
 
 /frau.{1,5}ledig/i
 /frau.{1,10}ist ihre wahl/i
@@ -142,6 +143,7 @@
 
 /frauen.{1,10}einfache anmeldung/i
 /frauen.{1,10}für dich/i
+/frauen.{1,10}sind online/i
 /frauen.{1,10}suchen.{1,10}liebe/i
 
 # G
@@ -154,6 +156,8 @@
 /geilen fick/i
 /geiles.{1,10}biest/i
 
+/gerade sind.{1,10}frauen online/i
+    
 /geschlossenen gruppe/i
 
 # H
@@ -163,6 +167,8 @@
 /habe? heute.{1,10}neue bilder/i
 
 /hallo süsser/iu
+
+/hartes für mich/iu
 
 /hat.{1,10}den chat/i
 /heißen?.{1,10}(frauen|singles)/i

@@ -60,6 +60,7 @@
 # ------------------------------------------------------------------------------
 /für mich eine internationale überweisung/iu
 
+/fonds erhalten werden.{1,15}betrag wird auf ihr.{1,15}konto/iu
 /freigabe ihrer gelder durch.{1,15}(finanz|ministerium)/i
 
 # G
@@ -148,6 +149,7 @@
 
 
 /sie.{1,10}eine.{1,10}transaktion.{1,15}zu kontaktieren/i
+
 /sie.{1,10}haben anspruch auf.{1,10}millionen/i
 /sie.{1,10}helfen.{1,15}geld.{1,10}millionen/i
 
