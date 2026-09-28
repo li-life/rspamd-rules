@@ -28,6 +28,7 @@
 # ------------------------------------------------------------------------------
 # Accounting - Hetzner Online GmbH
 # Apple
+# ChatGPT
 # Hetzner Cloud
 # iCloud
 # Support - Hetzner Online GmbH
@@ -37,7 +38,8 @@
 # Microsoft-Konto-Team
 # Microsoft Defender
 #
-# ChatGPT
+# OpenAI
+# OpenAI-Datenschutzcenter
 # ------------------------------------------------------------------------------
 
 #
@@ -206,7 +208,6 @@
 #/^open.?ai$/i
 
 /^openal/i
-/^open.?ai$/i
 /open.?ai.{0,5}chatgpt/i
 
 # P
