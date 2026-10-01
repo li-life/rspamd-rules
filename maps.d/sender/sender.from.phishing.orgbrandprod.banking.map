@@ -275,7 +275,7 @@
 # R
 # ------------------------------------------------------------------------------
 /raiffeisen.{0,10}gruppe/i
-/raiffeisen.{0,10}(kundenbetreuung|kundenservice)/i
+/raiffeisen.{0,10}(kundenbetreuung|kundendienst|kundenservice)/i
 /raiffeisen.{0,10}(sicherheit|support)/i
 /raiffeisen.{0,10}(team|twint)/i
 
@@ -288,6 +288,9 @@
 
 # S
 # ------------------------------------------------------------------------------
+/saxo.{0,5}bank/i
+/saxo.{0,5}trader/i
+
 /secure.?(go|plus).{0,5}(home|support)/i
 
 /securego(.?plus)?/i
@@ -386,6 +389,7 @@
 
 #
 /vr.?(bank|gruppe).{0,10}(deutschland|online|service|zentrale)/i
+/vr.?(bank|gruppe).{0,10}info/i
 /vr.?(bank|gruppe).?eg/i
 
 /^vr.?(bank|gruppe)$/i
