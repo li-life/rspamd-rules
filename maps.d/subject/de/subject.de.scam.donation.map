@@ -19,7 +19,7 @@
 
 # B
 # ------------------------------------------------------------------------------
-/benachrichtigung.{1,10}spendenzuwendung/i
+/benachrichtigung.{1,15}(spendenvergabe|spendenzuwendung)/i
 
 /bestätigung einer förderung/iu
 
@@ -50,6 +50,7 @@
 /gratulation.{1,10}ihre spende/i
 
 /^großzügige spende/iu
+/großzügiges bargeldgeschenk/iu
 /großzügigkeit wartet auf sie/iu
 
 # H
