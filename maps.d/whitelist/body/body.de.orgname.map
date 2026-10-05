@@ -274,7 +274,7 @@
 # ------------------------------------------------------------------------------
 
 # 23.12.25
-/outdooractive ag.{1,10}immenstadt.{1,10}deutschland/i 10.0
+/outdooractive ag.{1,10}immenstadt.{1,10}(germany|deutschland)/i 10.0
 
 # P
 # ------------------------------------------------------------------------------
@@ -404,14 +404,17 @@
 # 26.03.26
 /volkshochschule südost.{1,10}landkreis münchen gmbh/iu 10.0
 
+# 02.10.26
+/vnr verlag für die deutsche wirtschaft ag/i 10.0
+
+# 15.07.26
+/vicampo\.de gmbh.{1,10}taunusstraße 57.{1,10}55118 mainz/iu 10.0
+
 # W
 # ------------------------------------------------------------------------------
 
 # 25.09.25
 /wundermix gmbh.{1,10}dirnismaning 34 d.{1,10}garching bei münchen/i 10.0
-
-# 15.07.26
-/vicampo\.de gmbh.{1,10}taunusstraße 57.{1,10}55118 mainz/iu 10.0
 
 # X
 # ------------------------------------------------------------------------------
