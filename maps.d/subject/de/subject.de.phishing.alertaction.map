@@ -361,7 +361,7 @@
 /erinnerung.{1,10}sicherheitsupdate/iu
 /erinnerung.{1,10}teilnahme noch nicht abgeschlossen/i
 /erinnerung.{1,10}verlängern sie ihr.{1,15}abonnement/iu
-/erinnerung.{1,10}verifizierung ihrer/i
+/erinnerung.{1,10}verifizierung (ihrer|nötig)/iu
 
 /erinnerung.{1,10}zahlung konnte nicht/i
 /erinnerung.{1,10}zu ihrem/i
@@ -731,7 +731,8 @@
 
 /sicherheitscheck.{1,15}konto überprüfen/iu
 
-/sicherheitsmaßnahmen?.{1,15}jetzt.{1,15}konto/i
+/(sicherheitsmassnahmen?|sicherheitsmaßnahmen?).{1,10}(bestätigen|bestaetigen) sie ihren/i
+/(sicherheitsmassnahmen?|sicherheitsmaßnahmen?).{1,15}jetzt.{1,15}konto/i
 
 /sicherheits.?nachricht.{1,10}online/i
 
