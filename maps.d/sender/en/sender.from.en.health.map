@@ -236,6 +236,8 @@
 
 /(lose|melt|shed).{0,10}\d{2}/i
 
+/lbs in.{0,10}days/i
+
 /(bulging|flat|slimmer|tiny|your).{0,10}belly/i
 
 /(big|fat|flab|flat).{0,10}(belly|melting|size|stomage|tummy)/i
@@ -837,6 +839,7 @@
 
 /harvard.{0,15}(breaks|breakthrough|briefing)/i
 /harvard.{0,15}discovery/i
+/harvard.{0,10}research/i
 /harvard.{0,15}(secret|science|scientist)/i
 
 /hates it/i
@@ -1310,6 +1313,7 @@
 /simpler.{0,10}slim/i
 
 /skin.{0,10}(alert|doctor|fix|nail|tightening)/i
+/skin.{0,10}splotch(es)?/i
 /skin.{0,10}(confidence|experts?|glow|health|insider)/i
 /skin.{0,10}(report|restore)/i
 /skin.{0,10}(safety|sculptor|secrets?)/i
