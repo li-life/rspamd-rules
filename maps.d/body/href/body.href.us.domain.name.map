@@ -196,6 +196,9 @@
 # 11.03.25 "Your voice. Your freedom. Your Spam"
 /links\.truthsocial\.com/i
 
+# 17.10.26 - Enough with Twitter. It’s nothing but spam and phishing 
+/https:\/\/t\.co\//i
+
 # U
 # ------------------------------------------------------------------------------
 
@@ -223,6 +226,9 @@
 
 # 19.09.25
 /\.web\.app/i
+
+# 17.10.26
+# /web-gateway-\d{2}\.web\.app/i
 
 # 19.01.25
 /click\.promote\.weebly\.com/i

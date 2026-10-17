@@ -75,8 +75,9 @@
 # ------------------------------------------------------------------------------
 /cembra.{0,10}kundeninformation/i
 
-/comdirect.{0,10}bankteam/i
-/comdirect.{0,10}(kundenbetreuung|kundenservice)/i
+/comdirect.{0,10}(banking|bankteam)/i
+/comdirect.{0,10}digital/i
+/comdirect.{0,10}(kundenberatung|kundenbetreuung|kundenservice)/i
 
 /commerz-bank/i
 /commerz$/i
