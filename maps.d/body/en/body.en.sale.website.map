@@ -30,6 +30,8 @@
 # C
 # ------------------------------------------------------------------------------
 /came across your.{1,10}(web)?.?site/i
+/came across your.{1,10}www/i
+
 /checked your.{1,15}(web)?.?site.{1,15}www.{1,25}and found/i
 
 /connect regarding your.{1,10}(web)?.?site/i
@@ -88,6 +90,8 @@
 /(i.?a?m|we are).{1,10}indian?.{1,10}(based|development|web)/i
 /(i.?a?m|we are).{1,10}(it|software development) company.{1,10}in india/i
 
+/ideas tailored to.{1,10}www/i
+
 /improve your.{1,10}(web)?.?site.{1,10}performance/i
 /improving.{1,10}updating.{1,10}(web)?.?site/i
 
@@ -111,6 +115,7 @@
 
 # M
 # ------------------------------------------------------------------------------
+/make.{1,10}(web)?.?site.{1,10}more modern/i
 
 # N
 # ------------------------------------------------------------------------------
@@ -146,6 +151,8 @@
 
 # S
 # ------------------------------------------------------------------------------
+/share.{1,10}ideas for.{1,10}www/i
+
 /skilled.{1,10}web.?designer.{1,10}developer/i
 /specialized? in.{1,10}(web)?.?site.{1,10}design/i
 
