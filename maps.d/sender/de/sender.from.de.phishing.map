@@ -271,6 +271,8 @@
 
 /schutz.{0,10}(team|update)/i
 
+/schweiz.{0,10}track/i
+
 /sendungsinfo.{0,10}helpdesk/i
 
 /service.{0,10}anfrage/i

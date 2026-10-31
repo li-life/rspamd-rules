@@ -109,6 +109,8 @@
 /genau hinschauen/i
 /(global|klick).{0,10}sprachen?/i
 
+/gleitsicht nach/i
+
 /gratis.{0,10}(hörgeräte?|katalog)/i
 
 /gut.{0,10}versichert/i
