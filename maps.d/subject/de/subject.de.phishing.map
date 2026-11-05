@@ -43,6 +43,11 @@
 
 /wichtiger hinweis.{1,10}w.?8ben/i
 
+# Maut
+# ------------------------------------------------------------------------------
+/(information|mahnung).{1,10}streckenregistrierung/i
+/verfahren.{1,25}streckenkontrolle/i
+
 #
 #
 #
@@ -531,6 +536,7 @@
 
 # U
 # ------------------------------------------------------------------------------
+/unbekanntes.{1,10}gerät hat eine verbindung hergestellt/iu
 /unregelmäßigkeit im vertrag/iu
 
 /unstimmigkeitsmeldung nach.{1,10}gwg/i
