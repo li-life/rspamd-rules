@@ -41,7 +41,8 @@
 /abnehmexperte/i
 /abnehmhilfe/i
 /abonnementunterstützung/iu
-/abrechnung/i
+
+# /abrechnung/i
 
 /abschließen/i
 /abschliessen/i
@@ -952,7 +953,7 @@
 
 # Q
 # ------------------------------------------------------------------------------
-/quantensprung/i
+# /quantensprung/i
 /quellenblick/i
 
 # R
