@@ -1345,6 +1345,7 @@
 /simpler.{0,10}slim/i
 
 /skin.{0,10}(alert|doctor|fix|nail|tightening)/i
+/skin.{0,10}gap/i
 /skin.{0,10}splotch(es)?/i
 /skin.{0,10}(confidence|experts?|glow|health|insider)/i
 /skin.{0,10}(report|restore)/i
@@ -1614,6 +1615,7 @@
 /your.{1,10}recipes/i
 /your.{1,10}(skin|smile|stomach)/i
 /your.{1,10}(waist|wellness)/i
+/your.{1,10}zinc/i
 
 /youth.{0,10}(hack|restored)/i
 /youthful.{0,10}(boost|glow|strength|water|you)/i
