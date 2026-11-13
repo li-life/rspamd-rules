@@ -568,6 +568,7 @@
 
 /höhepunkt/iu
 
+/hör.?experte/i
 /hörgesundheit/i
 /hörleistung/iu
 
@@ -936,6 +937,8 @@
 /postzustellungssystem/i
 
 /potenz/i
+
+/praktische?\b/i
 
 /pramie/i
 /prämien?/i
