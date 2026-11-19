@@ -165,6 +165,7 @@
 # Microsoft uses "konto-team"!
 #/konto.{0,10}(informationsdienst|team|updates?)/i
 /konto.{0,10}(informationsdienst|notfall|updates?)/i
+/konto.{0,10}hinweis/i
 /konto.{0,10}sicherheit/i
 /konto.?id/i
 
@@ -293,6 +294,8 @@
 /sicherheits?.{0,10}bestätigung/iu
 /sicherheits?.{0,10}info(rmation)?/i
 /sicherheits?.{0,10}(kartenservice|support|vertrauen)/i
+
+/sofort.{0,10}service/i
 
 /spezielle.{0,10}nachricht/i
 
