@@ -225,6 +225,9 @@
 # 04.11.26
 /salon hagel gmbh.{1,15}werner-schroeder-straße 2.{1,10}21035 hamburg/i 10.0
 
+# 26.11.26
+/holiday extras gmbh.{1,10}aidenbachstr\. 52.{1,10}81379 münchen/i 10.0
+
 # I
 # ------------------------------------------------------------------------------
 
@@ -434,6 +437,12 @@
 
 # 19.11.26
 /schüco international kg.{1,10}karolinenstraße.{1,10}bielefeld.{1,10}33609/iu 10.0
+
+# 25.11.26
+/städt\. berufsschule für fachkräfte in arzt- und tierarztpraxen/iu
+
+# 26.11.26
+/störtebekker men care gmbh.{1,10}hanauer landstraße 196a.{1,10}60314 frankfurt am main/i 10.0
 
 # T
 # ------------------------------------------------------------------------------
