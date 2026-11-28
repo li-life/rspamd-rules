@@ -1601,6 +1601,7 @@
 
 /(worse|worst).{0,10}(breakfast|pain)/i
 /(worse|worst).{0,10}(fruits?|food)/i
+/(worse|worst).{0,10}remedy/i
 /(worse|worst).{0,10}(veggie|vision)/i
 
 /works like/i
