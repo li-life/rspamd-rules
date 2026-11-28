@@ -38,6 +38,8 @@
 /diät ohne verzicht.{1,10}jetzt/iu
 
 /fettanteil.{1,10}drastisch reduziert/i
+/fettverbrennung.{1,10}stunden am tag/i
+
 /geheimnis zum abnehmen/i
 
 /hartnäckiges bauchfett verloren/iu
@@ -51,6 +53,8 @@
 /(kg|kilo).{1,10}(in|pro).{1,10}monat.{1,10}ohne (diät|fasten)/i
 /(kg|kilo).{1,10}(in|pro).{1,10}monat.{1,10}sind.{1,10}kein problem/i
 /(kg|kilo).{1,10}(in|pro).{1,10}(tagen|stunden|woche) abnehmen/i
+
+/keine strenge diät/iu
 
 /\d{1,2}.{1,5}(kg|kilo).{1,10}in.{1,10}monat/i
 
@@ -74,7 +78,8 @@
 /rabatt auf.{1,15}diät.?kapseln/iu
 /täglich.{1,10}fett schmilzt/i
 
-/höhle.{1,10}unterstützt dieses produkt/iu
+/höhlen?.{1,10}insider/iu
+/höhlen?.{1,10}unterstützt dieses produkt/iu
 
 # Men
 # ------------------------------------------------------------------------------
