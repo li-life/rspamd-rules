@@ -16,7 +16,7 @@
 /brain.{0,10}(fuel|fixer|food|fog)/i
 /brain.{0,10}(hack|health)/i
 /brain.{0,10}(nutrient|power|waves?)/i
-/brain.{0,10}(scan|science|sleep|signal|steroid)/i
+/brain.{0,10}(scan|science|sleep|signal|steroid|surgeon)/i
 /brain.{0,10}(technique|threat|tonic|trick)/i
 /brain.{0,10}wellness/i
 
@@ -1601,6 +1601,7 @@
 
 /(worse|worst).{0,10}(breakfast|pain)/i
 /(worse|worst).{0,10}(fruits?|food)/i
+/(worse|worst).{0,10}remedy/i
 /(worse|worst).{0,10}(veggie|vision)/i
 
 /works like/i
